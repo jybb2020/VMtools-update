@@ -1,0 +1,41 @@
+@echo off
+echo ============================================
+echo VMware Tools Update Started
+echo ============================================
+
+REM --- Check if VMware Tools is installed ---
+if not exist "C:\Program Files\VMware\VMware Tools\vmtoolsd.exe" (
+    echo VMware Tools not detected. Exiting.
+    goto :EOF
+)
+
+REM --- Display current version ---
+echo Current VMware Tools Version:
+"C:\Program Files\VMware\VMware Tools\vmtoolsd.exe" -v
+echo.
+
+REM --- Run silent VMware Tools update ---
+echo Updating VMware Tools...
+
+
+
+\\EWDC-PHA-TMSDC1\vmtools\setup.exe /S /v"/qn REBOOT=Force"
+
+REM --- Wait for installer to settle ---
+timeout /t 20 /nobreak >nul
+
+REM --- Verify update ---
+echo.
+echo Verifying VMware Tools installation...
+
+if exist "C:\Program Files\VMware\VMware Tools\vmtoolsd.exe" (
+    echo VMware Tools update completed successfully.
+    echo Updated VMware Tools Version:
+    "C:\Program Files\VMware\VMware Tools\vmtoolsd.exe" -v
+) else (
+    echo VMware Tools update FAILED.
+)
+
+echo ============================================
+echo VMware Tools Update Script Finished
+echo ============================================
