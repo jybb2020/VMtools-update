@@ -32,3 +32,7 @@ Executes the VMware Tools installer in silent mode
 
 
 The update runs without user interaction
+
+
+To download old versions : https://packages.vmware.com/tools/releases/
+To download latest version : https://packages.vmware.com/tools/releases/latest/windows/
